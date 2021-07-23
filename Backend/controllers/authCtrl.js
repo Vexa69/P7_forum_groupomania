@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
 	if (!req.body.userName || !req.body.email || !req.body.password) {
-		return res.status(400).json({ message: 'one ore more paramaters empty' });
+		return res.status(400).json({ message: 'one more paramaters empty' });
 	}
 	const nameRegex = /(.*[a-z]){3,30}/;
 	const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -44,7 +44,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
 	if (!req.body.email || !req.body.password) {
-		return res.status(400).json({ message: 'one ore more paramaters empty' });
+		return res.status(400).json({ message: 'one more paramaters empty' });
 	}
 	User.findOne({
 		where: {

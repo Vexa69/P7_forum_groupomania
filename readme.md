@@ -1,4 +1,4 @@
-# PROJET NUMERO 7 - OPENCLASSROOMS - PARCOURS DEVELOPPEUR WEB
+# PROJET NUMERO 7 - Forum Groupomania
 
 # GROUPOMANIA - CREER UN RESEAU SOCIAL D'ENTREPRISE
 
@@ -57,7 +57,7 @@ Ceci va créer une base de données nommée "groupomania"
 
 ## DANS LE DOSSIER BACKEND
 
--   Ouvrez le fichier " .env.initial " : vous devez assigner des valeurs aux 3 variables suivantes:
+-   Ouvrez le fichier ".env" : vous devez assigner des valeurs aux 3 variables suivantes:
 
 ```bash
 DB_USER =
