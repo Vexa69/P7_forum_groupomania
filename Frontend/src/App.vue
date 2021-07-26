@@ -1,4 +1,4 @@
-<!-- fichier central de l'qpplication Vue.-->
+<!-- fichier central de l'application Vue.-->
 
 <template>
 	<div id="app">

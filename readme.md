@@ -1,7 +1,5 @@
 # PROJET NUMERO 7 - Forum Groupomania
 
-# GROUPOMANIA - CREER UN RESEAU SOCIAL D'ENTREPRISE
-
 ## INSTRUCTIONS
 
 -   Il vous faudra avoir installé sur votre machine:
@@ -12,7 +10,7 @@
 *   Créer un dossier vide et cloner ce repository à l'intérieur:
 
 ```bash
-git clone https://github.com/RafaRemote/P7-Groupomania.git
+git clone https://github.com/vexa69/P7-Groupomania.git
 ```
 
 -   Vous verrez deux dossiers distincts: Frontend et Backend.
