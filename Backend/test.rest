@@ -2,18 +2,33 @@ POST  http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "johndoe@gmail.com",
-    "password": "aurevoir1"
+    "email": "jeanlouis@gmail.com",
+    "password": "coucoutoi1"
 }
 
 
 #######
 
-GET http://localhost:3000/api/message
+GET http://localhost:3000/api/messages
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYyNzI4OTA3NywiZXhwIjoxNjI3Mzc1NDc3fQ.BkI0JDCFjHX5HxLNJycqNxy19o8DSNM3TXwQtoddnQY
 
 
 ######
 
-PUT http://localhost:3000/api/message
+PUT http://localhost:3000/api/messages
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYyNzI4OTA3NywiZXhwIjoxNjI3Mzc1NDc3fQ.BkI0JDCFjHX5HxLNJycqNxy19o8DSNM3TXwQtoddnQY
+content-type: application/json
 
+{
+    "comment: on change tout ça"
+}
 
+#####
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "davidcinq@gmail.com",
+    "password": "123456"
+}
