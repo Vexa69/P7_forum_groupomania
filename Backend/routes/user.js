@@ -12,4 +12,3 @@ router.delete('/', auth, userCtrl.deleteOneUser);
 router.delete('/:id', auth, userCtrl.deleteMyAccount);
 
 module.exports = router;
-frzfz;

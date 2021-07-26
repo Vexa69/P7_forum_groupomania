@@ -12,4 +12,3 @@ router.post('/', auth, commentCtrl.createComment);
 router.delete('/', auth, commentCtrl.deleteComment);
 
 module.exports = router;
-dfzdf;
