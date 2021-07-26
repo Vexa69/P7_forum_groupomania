@@ -32,3 +32,7 @@ Content-Type: application/json
     "email": "davidcinq@gmail.com",
     "password": "123456"
 }
+
+########
+DELETE  http://localhost:3000/api/messages/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGUyZmU0ZDI5Y2U0YTBjNjBiNDY2ODAiLCJpYXQiOjE2MjYwNzg0OTUsImV4cCI6MTYyNjE2NDg5NX0.RJzRZRqECpeurQYSB-1TKu-PrcS4v_Nv_FOLLXLRF-k
