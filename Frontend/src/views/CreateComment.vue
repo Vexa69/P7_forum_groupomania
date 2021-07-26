@@ -79,7 +79,7 @@ export default {
 						this.UserId = '';
 						this.newMessage = '';
 
-						alert('Commentaire Posté!');
+						alert('Commentaire Posté');
 						router.push({ path: 'Comment' });
 					})
 					.catch(error => {
