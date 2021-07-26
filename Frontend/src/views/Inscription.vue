@@ -100,7 +100,7 @@ export default {
 						console.log(error);
 					});
 			} else {
-				console.log('validation for, method sendForm, renvoie une erreur');
+				console.log('validation form, method sendForm, renvoie une erreur');
 				this.invalid = true;
 			}
 		}
