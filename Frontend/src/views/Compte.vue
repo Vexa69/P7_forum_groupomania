@@ -93,7 +93,7 @@ export default {
 		},
 		deleteMyAccount(n) {
 			let id = n;
-			let confirmUserDeletion = confirm('voulez-vou vraiment supprimer votre compte ?');
+			let confirmUserDeletion = confirm('voulez-vous vraiment supprimer votre compte ?');
 			if (confirmUserDeletion == true) {
 				axios
 					.delete('http://localhost:3000/api/users/' + id, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
