@@ -172,7 +172,7 @@ export default {
 					.then(res => console.log(res))
 					.catch(error => {
 						location.reload();
-						console.log('ligne 13 ' + error);
+						console.log('ligne 133 ' + error);
 					});
 			} else {
 				return;
