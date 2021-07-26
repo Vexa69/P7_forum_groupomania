@@ -1,5 +1,5 @@
 <!-- Pade d'administration du site -->
-
+fddqfd
 <template>
 	<div class="container">
 		<main class="col-12">

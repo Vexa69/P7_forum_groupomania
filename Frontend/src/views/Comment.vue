@@ -1,5 +1,5 @@
 <!--  Page qui represente la vue sur une image en particulier, avec ses commentaires si il y a -->
-
+fddfd
 <template>
 	<main class="container">
 		<!-- titre -->
