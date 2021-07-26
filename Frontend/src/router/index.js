@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
 	const publicPages = ['/', '/inscription'];
 	const authRequired = !publicPages.includes(to.path);
 	const loggedIn = localStorage.getItem('userId');
-	const loggedToken = localStorage.getItem('token');
+	const loggedToken = localStorage.getItem('toke');
 	if (authRequired && !loggedIn && !loggedToken) {
 		return next('/');
 	}
