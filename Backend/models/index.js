@@ -46,3 +46,4 @@ db.users.hasMany(db.messages);
 db.users.hasMany(db.comments);
 
 module.exports = db;
+sdsf;
