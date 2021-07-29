@@ -50,6 +50,36 @@ exports.findAllComments = (req, res, next) => {
 		.catch(error => res.status(400).json({ error }));
 };
 
+// UPDATE
+
+exports.updateOneComment = (req, res, next) => {
+	//vérifcation des données
+	try {
+		if (req.body.content === '') throw 'Veuillez renseigner un contenu';
+	} catch (error) {
+		return res.status(400).json({
+			error: error
+		});
+	}
+	//modification du commentaire
+	sequelize.Comment.update(
+		{
+			content: req.body.content
+		},
+		{
+			where: {
+				id: req.params.id
+			}
+		}
+	)
+		.then(response =>
+			res.status(200).json({
+				message: 'Commentaire bien modifié'
+			})
+		)
+		.catch(error => console.log('ERREUR updateValue'));
+};
+
 // DELETE
 
 exports.deleteComment = (req, res, next) => {

@@ -94,6 +94,37 @@ exports.findAllMessagesForOne = (req, res, next) => {
 		});
 };
 
+// UPDATE
+exports.updateOneMessage = (req, res, next) => {
+	//vérication des données
+	try {
+		if (req.body.content === '') throw 'Veuillez renseigner un contenu';
+		if (req.body.title === '') throw 'Veuillez renseigner un titre';
+	} catch (error) {
+		return res.status(400).json({
+			error: error
+		});
+	}
+	//modification du post
+	sequelize.Message.update(
+		{
+			title: req.body.title,
+			content: req.body.content,
+			url_image: req.body.url_image
+		},
+		{
+			where: {
+				id: req.params.id
+			}
+		}
+	)
+		.then(response =>
+			res.status(200).json({
+				message: 'Post bien modifié'
+			})
+		)
+		.catch(error => console.log('ERREUR updateValue'));
+};
 // DELETE
 
 exports.deleteMessage = (req, res, next) => {

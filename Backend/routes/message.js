@@ -12,6 +12,8 @@ router.get('/:id', messageCtrl.findOneMessage);
 
 router.get('/', messageCtrl.findAllMessages);
 
-router.delete('/:id', auth, messageCtrl.deleteMessage);
+router.put('/:id', auth, posts.updateOneMessage);
+
+router.delete('/', auth, messageCtrl.deleteMessage);
 
 module.exports = router;
