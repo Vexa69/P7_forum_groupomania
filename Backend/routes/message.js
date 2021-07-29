@@ -12,7 +12,7 @@ router.get('/:id', messageCtrl.findOneMessage);
 
 router.get('/', messageCtrl.findAllMessages);
 
-router.put('/:id', auth, posts.updateOneMessage);
+router.put('/:id', auth, messageCtrl.updateOneMessage);
 
 router.delete('/', auth, messageCtrl.deleteMessage);
 
