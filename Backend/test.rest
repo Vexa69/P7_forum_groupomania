@@ -10,17 +10,17 @@ Content-Type: application/json
 #######
 
 GET http://localhost:3000/api/messages
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYyNzI4OTA3NywiZXhwIjoxNjI3Mzc1NDc3fQ.BkI0JDCFjHX5HxLNJycqNxy19o8DSNM3TXwQtoddnQY
+Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYyNzY0MzM2OCwiZXhwIjoxNjI3NzI5NzY4fQ.TuFTEDnMQjc8VapWdsrNrv9rDzyxh2cyXVCvkr1wPjc
 
 
 ######
 
-PUT http://localhost:3000/api/messages
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYyNzYzODQ1NSwiZXhwIjoxNjI3NzI0ODU1fQ.5FGAEm7qUhza9TPc5jJ4R_obJI76lDOIoNqi2fP6Hws
+POST http://localhost:3000/api/messages/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYyNzY0NDE1MiwiZXhwIjoxNjI3NzMwNTUyfQ.DukBzxGaqQogCLBvH-tduD8exo_RTZqkw61oLmNhwAk
 content-type: application/json
 
 {
-    "comment": "on change tout ça"
+    "message": "on modifie"
 }
 
 #####
@@ -29,10 +29,11 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "davidcinq@gmail.com",
-    "password": "123456"
+    "email": "linette@gmail.com",
+    "password": "saluttoi1"
 }
 
 ########
-DELETE  http://localhost:3000/api/messages/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGUyZmU0ZDI5Y2U0YTBjNjBiNDY2ODAiLCJpYXQiOjE2MjYwNzg0OTUsImV4cCI6MTYyNjE2NDg5NX0.RJzRZRqECpeurQYSB-1TKu-PrcS4v_Nv_FOLLXLRF-k
+delete http://localhost:3000/api/comments/
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYyNzY0NDAwNCwiZXhwIjoxNjI3NzMwNDA0fQ.FJrP6c7Ytxf-E3kqrBnm6GDzJKW9nt9cGmjUyTWvAjw
+content-type: application/json

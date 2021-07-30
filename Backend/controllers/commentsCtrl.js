@@ -1,3 +1,4 @@
+const { sequelize } = require('../models');
 const db = require('../models'); // les modèles sequelize
 const Comment = db.comments;
 const User = db.users;
@@ -51,19 +52,21 @@ exports.findAllComments = (req, res, next) => {
 };
 
 // UPDATE
-exports.updateComment = (req, res, next) => {
-	console.log('COMMENT UPDATE PROCESS');
-	console.log(' comment id is: ' + req.query.commentId);
-	console.log(' comment Uid is : ' + req.query.commentUid);
-	console.log(' currentUid who ask the update is : ' + req.query.currentUid);
+exports.updateOneComment = (req, res, next) => {
+	// if ( !req.body.UserId || !req.body.MessageId || !req.body.comment || req.body.comment.length > 1500 ) {
+	//     return res.status(400).json({message: "one or more paramaters are invalide. Max comment length is 1500"})
+	// } else {
 
-	console.log(' is it the author of the comment who ask the update or is he Admin (admin is uid=1 so should be currentUid = 1) ? ') +
-		console.log(' if True => update the comment ');
-	console.log(' if False => unauthorized ');
-
-	Comment.update({ where: { id: req.query.commentId } })
-		.then(() => res.status(200).json({ message: 'Commentaire modifié !' }))
+	const Update = Update({
+		UserId: req.body.UserId,
+		MessageId: req.body.MessageId,
+		comment: req.body.comment
+	});
+	comment
+		.save()
+		.then(() => res.status(201).json({ message: 'Commentaire modifié !' }))
 		.catch(error => res.status(400).json({ error }));
+	//}
 };
 // DELETE
 
