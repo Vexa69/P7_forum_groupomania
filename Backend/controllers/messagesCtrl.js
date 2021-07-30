@@ -95,36 +95,29 @@ exports.findAllMessagesForOne = (req, res, next) => {
 };
 
 // UPDATE
-exports.updateOneMessage = (req, res, next) => {
-	//vérication des données
-	try {
-		if (req.body.content === '') throw 'Veuillez renseigner un contenu';
-		if (req.body.title === '') throw 'Veuillez renseigner un titre';
-	} catch (error) {
-		return res.status(400).json({
-			error: error
-		});
-	}
-	//modification du post
-	sequelize.Message.update(
-		{
-			title: req.body.title,
-			content: req.body.content,
-			url_image: req.body.url_image
-		},
-		{
-			where: {
-				id: req.params.id
-			}
-		}
-	)
-		.then(response =>
-			res.status(200).json({
-				message: 'Post bien modifié'
+exports.updateMessage = (req, res, next) => {
+	console.log(' MESSAGE UPDATE PROCESS ');
+	console.log(' message Id is: ' + req.query.messageId);
+	console.log(' message User Id is : ' + req.query.messageUid);
+	console.log(' User Id who ask the update is : ' + req.query.uid);
+
+	console.log(' is it the author of the message who ask the update or is he Admin (admin is uid=1) ? ') +
+		console.log(' if True => update the message ');
+	console.log(' if False => unauthorized ');
+
+	console.log(req.query.messageUid == req.query.uid || req.query.uid == 1);
+	if (req.query.messageUid == req.query.uid || req.query.uid == 1) {
+		Comment.update({ where: { MessageId: req.query.messageId } });
+		Message.update({ where: { id: req.query.messageId } })
+			.then(res => {
+				res.status(200).json({ message: 'Message and its comments have been update' });
 			})
-		)
-		.catch(error => console.log('ERREUR updateValue'));
+			.catch(error => res.status(400).json({ error }));
+	} else {
+		res.status(401).json({ message: ' unauthorized ' });
+	}
 };
+
 // DELETE
 
 exports.deleteMessage = (req, res, next) => {

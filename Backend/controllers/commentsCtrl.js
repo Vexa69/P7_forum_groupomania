@@ -51,35 +51,20 @@ exports.findAllComments = (req, res, next) => {
 };
 
 // UPDATE
+exports.updateComment = (req, res, next) => {
+	console.log('COMMENT UPDATE PROCESS');
+	console.log(' comment id is: ' + req.query.commentId);
+	console.log(' comment Uid is : ' + req.query.commentUid);
+	console.log(' currentUid who ask the update is : ' + req.query.currentUid);
 
-exports.updateOneComment = (req, res, next) => {
-	//vérifcation des données
-	try {
-		if (req.body.content === '') throw 'Veuillez renseigner un contenu';
-	} catch (error) {
-		return res.status(400).json({
-			error: error
-		});
-	}
-	//modification du commentaire
-	sequelize.Comment.update(
-		{
-			content: req.body.content
-		},
-		{
-			where: {
-				id: req.params.id
-			}
-		}
-	)
-		.then(response =>
-			res.status(200).json({
-				message: 'Commentaire bien modifié'
-			})
-		)
-		.catch(error => console.log('ERREUR updateValue'));
+	console.log(' is it the author of the comment who ask the update or is he Admin (admin is uid=1 so should be currentUid = 1) ? ') +
+		console.log(' if True => update the comment ');
+	console.log(' if False => unauthorized ');
+
+	Comment.update({ where: { id: req.query.commentId } })
+		.then(() => res.status(200).json({ message: 'Commentaire modifié !' }))
+		.catch(error => res.status(400).json({ error }));
 };
-
 // DELETE
 
 exports.deleteComment = (req, res, next) => {
