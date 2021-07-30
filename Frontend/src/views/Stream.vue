@@ -46,6 +46,11 @@
 								><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">PUBLIER</button></router-link
 							>
 						</div>
+						<div id="updateButton" class=" card-body text-center">
+							<router-link to="/UpdateCreate"
+								><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">MODIFIER</button></router-link
+							>
+						</div>
 					</div>
 				</article>
 				<!-- bloc avec tous le(s) message(s) -->
@@ -85,11 +90,6 @@
 								<button @click="deleteMessage(message.id, message.UserId, id)" class="border-0">
 									<img src="../assets/trash.svg" alt="trash" style="width:25px" />
 								</button>
-								<div v-if="isAdmin || message.UserId == id">
-									<button @click="updateMessage(message.id, message.UserId, id)" class="border-0">
-										<img src="../assets/eye.svg" alt="eye" style="width:25px" />
-									</button>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -183,12 +183,7 @@ export default {
 				return;
 			}
 		},
-		updateMessage: async function() {
-			this.message = 'mise à jour';
-			console.log(this.$el.textContent); // => 'pas mis à jour'
-			await this.$nextTick();
-			console.log(this.$el.textContent); // => 'mis à jour'
-		},
+
 		localClear() {
 			localStorage.clear();
 			router.push({ path: '/' });

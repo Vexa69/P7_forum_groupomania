@@ -32,9 +32,19 @@ const routes = [
 		component: () => import('../views/Create')
 	},
 	{
+		path: '/Updatecreate',
+		name: 'UpdateCreate',
+		component: () => import('../views/UpdateCreate')
+	},
+	{
 		path: '/CreateComment',
 		name: 'CreateComment',
 		component: () => import('../views/CreateComment')
+	},
+	{
+		path: '/UpdateComment',
+		name: 'UpdateComment',
+		component: () => import('../views/UpdateComment')
 	},
 	{
 		path: '/inscription',

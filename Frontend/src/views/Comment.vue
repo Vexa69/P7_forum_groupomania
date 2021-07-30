@@ -108,11 +108,11 @@
 						<button @click="deleteComment(comment.id, comment.UserId, currentUserId)" class="border-0">
 							<img src="../assets/trash.svg" alt="trash" style="width:25px" />
 						</button>
-						<div v-if="isAdmin || comment.UserId == currentUserId">
-							<button @click="updateComment(comment.id, comment.UserId, currentUserId)" class="border-0">
-								<img src="../assets/eye.svg" alt="eye" style="width:25px" />
-							</button>
-						</div>
+					</div>
+					<div id="updateButton" class=" card-body text-center">
+						<router-link to="/UpdateComment"
+							><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">MODIFIER</button></router-link
+						>
 					</div>
 				</div>
 			</div>
@@ -249,12 +249,6 @@ export default {
 			} else {
 				return;
 			}
-		},
-		updateComment: async function() {
-			this.message = 'mise à jour';
-			console.log(this.$el.textContent); // => 'pas mis à jour'
-			await this.$nextTick();
-			console.log(this.$el.textContent); // => 'mis à jour'
 		}
 	}
 };

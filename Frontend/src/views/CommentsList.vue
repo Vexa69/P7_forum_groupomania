@@ -67,11 +67,7 @@
 							<span class="spanBadge"> {{ i.userName.charAt(0).toUpperCase() + i.userName.slice(1) }} </span>
 							<span class="spanBadge"> {{ i.message.slice(0, 10) }}...</span>
 							<span class="spanBadge"> ref #{{ i.id }}</span>
-							<span class="spanBadge">
-								<button class="rounded" @click="seeOnePost(i.id)">
-									<img src="../assets/eye.svg" alt="logo eye" style="width:25px" />
-								</button>
-							</span>
+							<span class="spanBadge"> </span>
 						</div>
 					</div>
 				</sub>

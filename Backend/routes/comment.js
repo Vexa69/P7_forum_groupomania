@@ -9,7 +9,7 @@ router.get('/:Messageid', commentsCtrl.findOneComment);
 
 router.post('/', auth, commentsCtrl.createComment);
 
-router.put('/', auth, commentsCtrl.updateOneComment);
+router.put('/:id', auth, commentsCtrl.modifyOneComments);
 
 router.delete('/', auth, commentsCtrl.deleteComment);
 
