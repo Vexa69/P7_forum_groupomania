@@ -4,16 +4,16 @@ const auth = require('../middleware/auth');
 const messageCtrl = require('../controllers/messagesCtrl');
 const multer = require('../middleware/multer-config');
 
-router.post('/', auth, multer, messagesCtrl.createMessage); // Post - Création des messages avec les images.
+router.post('/', auth, multer, messageCtrl.createMessage); // Post - Création des messages avec les images.
 
-router.get('/all/:id', messagesCtrl.findAllMessagesForOne);
+router.get('/all/:id', messageCtrl.findAllMessagesForOne);
 
-router.get('/:id', messagesCtrl.findOneMessage);
+router.get('/:id', messageCtrl.findOneMessage);
 
-router.get('/', messagesCtrl.findAllMessages);
+router.get('/', messageCtrl.findAllMessages);
 
-router.put('/:id', auth, messagesCtrl.modifyOneMessages);
+router.put('/:id', auth, messageCtrl.modifyOneMessages);
 
-router.delete('/', auth, messagesCtrl.deleteMessage);
+router.delete('/', auth, messageCtrl.deleteMessage);
 
 module.exports = router;

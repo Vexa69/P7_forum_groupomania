@@ -95,27 +95,27 @@ exports.findAllMessagesForOne = (req, res, next) => {
 };
 
 // UPDATE
-exports.updateMessage = (req, res, next) => {
-	console.log(' MESSAGE UPDATE PROCESS ');
-	console.log(' message Id is: ' + req.query.messageId);
-	console.log(' message User Id is : ' + req.query.messageUid);
-	console.log(' User Id who ask the update is : ' + req.query.uid);
+exports.modifyOneMessages = (req, res, next) => {
+	let messageObject = {};
+	const body = sanitize(req.body);
+	req.file
+		? (Message.findOne({ _id: req.params.id })
+				.then(message => {
+					const filename = message.imageUrl.split("/images/")[1];
+					fs.unlinkSync(`images/${filename}`);
+				})
+				.catch(error => res.status(500).json({ error })),
+		  (messageObject = {
+				...JSON.parse(body.sauce),
+				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+		  }))
+		: (messageObject = { ...body });
 
-	console.log(' is it the author of the message who ask the update or is he Admin (admin is uid=1) ? ') +
-		console.log(' if True => update the message ');
-	console.log(' if False => unauthorized ');
-
-	console.log(req.query.messageUid == req.query.uid || req.query.uid == 1);
-	if (req.query.messageUid == req.query.uid || req.query.uid == 1) {
-		Comment.update({ where: { MessageId: req.query.messageId } });
-		Message.update({ where: { id: req.query.messageId } })
-			.then(res => {
-				res.status(200).json({ message: 'Message and its comments have been update' });
-			})
-			.catch(error => res.status(400).json({ error }));
-	} else {
-		res.status(401).json({ message: ' unauthorized ' });
-	}
+	Message.updateOne({ _id: req.params.id }, { ...messageObject, _id: req.params.id })
+		.then(() => {
+			res.status(200).json({ message: "Objet modifié !" });
+		})
+		.catch(error => res.status(400).json({ error }));
 };
 
 // DELETE

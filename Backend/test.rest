@@ -15,12 +15,12 @@ Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdC
 
 ######
 
-POST http://localhost:3000/api/messages/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYyNzY0NDE1MiwiZXhwIjoxNjI3NzMwNTUyfQ.DukBzxGaqQogCLBvH-tduD8exo_RTZqkw61oLmNhwAk
+POST http://localhost:3000/api/comments/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYyNzY1MDQ1MSwiZXhwIjoxNjI3NzM2ODUxfQ.q5f1mhYrOUHx_NY0ShXKEc22Cgj3uVkJwkUYg_cHf6k
 content-type: application/json
 
 {
-    "message": "on modifie"
+    "comment": "nouvelle modif2"
 }
 
 #####

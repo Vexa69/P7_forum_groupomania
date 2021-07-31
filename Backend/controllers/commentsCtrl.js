@@ -52,21 +52,27 @@ exports.findAllComments = (req, res, next) => {
 };
 
 // UPDATE
-exports.updateOneComment = (req, res, next) => {
-	// if ( !req.body.UserId || !req.body.MessageId || !req.body.comment || req.body.comment.length > 1500 ) {
-	//     return res.status(400).json({message: "one or more paramaters are invalide. Max comment length is 1500"})
-	// } else {
+exports.modifyOneComments = (req, res, next) => {
+	let commentObject = {};
+	const body = sanitize(req.body);
+	req.file
+		? (Comment.findOne({ _id: req.params.id })
+				.then(Comment => {
+					const filename = comment.imageUrl.split("/images/")[1];
+					fs.unlinkSync(`images/${filename}`);
+				})
+				.catch(error => res.status(500).json({ error })),
+		  (commentObject = {
+				...JSON.parse(body.comment),
+				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+		  }))
+		: (commentObject = { ...body });
 
-	const Update = Update({
-		UserId: req.body.UserId,
-		MessageId: req.body.MessageId,
-		comment: req.body.comment
-	});
-	comment
-		.save()
-		.then(() => res.status(201).json({ message: 'Commentaire modifié !' }))
+	Comment.updateOne({ _id: req.params.id }, { ...commentObject, _id: req.params.id })
+		.then(() => {
+			res.status(200).json({ message: "Objet modifié !" });
+		})
 		.catch(error => res.status(400).json({ error }));
-	//}
 };
 // DELETE
 
