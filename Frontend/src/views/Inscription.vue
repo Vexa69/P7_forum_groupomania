@@ -80,7 +80,7 @@ export default {
 			if (!this.inputUserName || !this.inputEmail || !this.inputPassword) {
 				return (this.invalid = true);
 			}
-			const nameRegex = /(.*[a-z]){3,30}/;
+			const nameRegex = /(.*[A-Za-z]){3,30}/;
 			const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 			const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 

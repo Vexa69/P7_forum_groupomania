@@ -9,7 +9,7 @@ exports.signup = (req, res, next) => {
 	if (!req.body.userName || !req.body.email || !req.body.password) {
 		return res.status(400).json({ message: 'one or more paramaters empty' });
 	}
-	const nameRegex = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
+	const nameRegex = /(.*[A-Za-z]){3,30}/;
 	const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 	const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
