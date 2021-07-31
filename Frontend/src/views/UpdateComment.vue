@@ -54,39 +54,93 @@ export default {
 		};
 	},
 	methods: {
-		callName() {
-			let name = localStorage.getItem('userName');
-			return name.charAt(0).toUpperCase() + name.slice(1);
-		},
-		callNumber() {
-			return localStorage.getItem('MessageId');
-		},
-		send() {
-			if (!this.newUpdate || !localStorage.getItem('userId') || !localStorage.getItem('MessageId' || this.newUpdate.length > 1500)) {
-				this.isInvalid = true;
-			} else {
-				let UserId = localStorage.getItem('userId');
-				let Update = this.newUpdate.toString();
-				let MessageId = localStorage.getItem('MessageId');
-
-				axios
-					.post(
-						'http://localhost:3000/api/comments/',
-						{ UserId, Update, MessageId },
-						{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
-					)
-					.then(() => {
-						this.UserId = '';
-						this.newUpdate = '';
-
-						alert('Commentaire modifié!');
-						router.push({ path: 'Update' });
-					})
-					.catch(error => {
-						console.log(error);
+		updateComment() {
+			axios
+				.put(
+					'http://127.0.0.1:3000/api/comments/' + this.$route.params.id,
+					{ comment: this.editComment },
+					{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
+				)
+				.then(res => {
+					if (res.status === 200) {
+						alert({
+							text: 'Le commentaire à été mis à jour !',
+							footer: 'Redirection en cours...',
+							icon: 'success',
+							timer: 1500,
+							showConfirmButton: false,
+							timerProgressBar: true,
+							willClose: () => {
+								router.push(this.messageId.slice(1));
+								this.messageId = '';
+							}
+						});
+					}
+				})
+				.catch(function(error) {
+					const codeError = error.message.split('code ')[1];
+					let messageError = '';
+					switch (codeError) {
+						case '400':
+							messageError = "Le commentaire n'a pas été mis à jour !";
+							break;
+						case '401':
+							messageError = 'Requête non-authentifiée !';
+							break;
+					}
+					alert({
+						title: 'Une erreur est survenue',
+						text: messageError || error.message,
+						icon: 'error',
+						timer: 1500,
+						showConfirmButton: false,
+						timerProgressBar: true
 					});
-			}
+				});
 		}
+	},
+	beforeMount() {
+		axios
+			.get('http://127.0.0.1:3000/api/comments/' + this.$route.params.id, {
+				headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+			})
+			.then(res => {
+				if (res.data === null) {
+					alert({
+						title: 'Une erreur est survenue',
+						text: "Ce commentaire n'existe pas !",
+						icon: 'error',
+						timer: 1500,
+						showConfirmButton: false,
+						timerProgressBar: true,
+						willClose: () => {
+							router.push('/messages');
+						}
+					});
+				}
+				this.editUserId = res.data.UserId;
+				this.messageId = '#/commentaires/' + res.data.MessageId;
+				if (this.editUserId == localStorage.getItem('userId')) {
+					this.editorTag = '( Utilisateur : ' + res.data.User.userName + ' )';
+					this.editComment = res.data.comment;
+				} else if (localStorage.getItem('role') == 'true') {
+					this.editorTag = '( Administrateur : ' + localStorage.getItem('userName') + ' )';
+					this.editComment = res.data.comment;
+					this.editorColor = 'text-danger';
+				} else {
+					alert({
+						title: 'Une erreur est survenue',
+						text: "Vous n'avez pas accès à cette fonctionnalité !",
+						icon: 'error',
+						timer: 1500,
+						showConfirmButton: false,
+						timerProgressBar: true,
+						willClose: () => {
+							router.push(this.messageId);
+						}
+					});
+				}
+			});
 	}
 };
 </script>
