@@ -46,11 +46,6 @@
 								><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">PUBLIER</button></router-link
 							>
 						</div>
-						<div id="updateButton" class=" card-body text-center">
-							<router-link to="/UpdateCreate"
-								><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">MODIFIER</button></router-link
-							>
-						</div>
 					</div>
 				</article>
 				<!-- bloc avec tous le(s) message(s) -->
@@ -86,6 +81,11 @@
 							<button @click="commentPage(message.id)" class="border-0">
 								<img src="../assets/comment_black.svg" alt="comment_black" style="width:25px" />
 							</button>
+							<div id="updateButton" class=" card-body text-center">
+								<router-link to="/EditCreate"
+									><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">MODIFIER</button></router-link
+								>
+							</div>
 							<div v-if="isAdmin || message.UserId == id">
 								<button @click="deleteMessage(message.id, message.UserId, id)" class="border-0">
 									<img src="../assets/trash.svg" alt="trash" style="width:25px" />

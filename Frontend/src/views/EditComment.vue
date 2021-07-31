@@ -11,13 +11,13 @@
 				</div>
 				<div class="row">
 					<div class="col-12 justify-content-center form-group">
-						<label for="newUpdate">À vos claviers...</label>
+						<label for="newEdit">À vos claviers...</label>
 						<textarea
 							v-on:keydown="isInvalid = false"
 							class="form-control"
-							v-model="newUpdate"
-							id="newUpdate"
-							name="update"
+							v-model="newEdit"
+							id="newEdit"
+							name="edit"
 							rows="8"
 							placeholder=" Saisissez votre commentaire ici. (1500 caractères max) "
 						></textarea>
@@ -43,7 +43,7 @@ import router from '../router';
 import '../main.css';
 
 export default {
-	name: 'UpdateComment',
+	name: 'EditComment',
 	data() {
 		return {
 			isAdmin: false,
@@ -54,10 +54,10 @@ export default {
 		};
 	},
 	methods: {
-		updateComment() {
+		UpdateComment() {
 			axios
 				.put(
-					'http://127.0.0.1:3000/api/comments/' + this.$route.params.id,
+					'http://127.0.0.1:3000/api/commentsCtrl/' + this.$route.params.id,
 					{ comment: this.editComment },
 					{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
 				)
@@ -101,7 +101,7 @@ export default {
 	},
 	beforeMount() {
 		axios
-			.get('http://127.0.0.1:3000/api/comments/' + this.$route.params.id, {
+			.get('http://127.0.0.1:3000/api/commentsCtrl/' + this.$route.params.id, {
 				headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
 			})
 			.then(res => {
@@ -119,7 +119,7 @@ export default {
 					});
 				}
 				this.editUserId = res.data.UserId;
-				this.messageId = '#/commentaires/' + res.data.MessageId;
+				this.messageId = '#/comment/' + res.data.MessageId;
 				if (this.editUserId == localStorage.getItem('userId')) {
 					this.editorTag = '( Utilisateur : ' + res.data.User.userName + ' )';
 					this.editComment = res.data.comment;

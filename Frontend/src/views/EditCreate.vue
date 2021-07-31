@@ -15,9 +15,9 @@
 						<textarea
 							v-on:keydown="isInvalid = false"
 							class="form-control"
-							v-model="newUpdate"
-							id="newUpdate"
-							name="updateCreate"
+							v-model="newEdit"
+							id="newEdit"
+							name="editCreate"
 							rows="8"
 							placeholder="Saisissez votre message. (1500 caractères max)"
 						></textarea>
@@ -64,11 +64,11 @@ import router from '../router';
 import '../main.css';
 
 export default {
-	name: 'Create',
+	name: 'editCreate',
 	data() {
 		return {
 			isAdmin: false,
-			newImage: '',
+			newEdit: '',
 			currentUserId: '',
 			newMessage: '',
 			file: null,
