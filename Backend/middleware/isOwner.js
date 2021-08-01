@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
 				} else {
 					throw 'User ID non propriétaire !';
 				}
-				res.status(200).json(sauce);
+				res.status(200).json(message);
 			})
 
 			.catch(error => res.status(404).json({ error }));
