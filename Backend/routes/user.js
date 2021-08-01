@@ -7,7 +7,7 @@ router.get('/all/', userCtrl.findAllUsers);
 
 router.get('/:id', userCtrl.findOneUser);
 
-router.put('/:id', auth, userCtrl.updateUserName);
+router.get('/:id', auth, userCtrl.updateUserName);
 
 router.delete('/', auth, userCtrl.deleteOneUser);
 

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const isOwner = require('../middleware/isOwner');
 const auth = require('../middleware/auth');
 const messageCtrl = require('../controllers/messagesCtrl');
 const multer = require('../middleware/multer-config');
@@ -12,8 +13,6 @@ router.get('/:id', messageCtrl.findOneMessage);
 
 router.get('/', messageCtrl.findAllMessages);
 
-router.put('/:id', auth, isOwner, messageCtrl.modifyOneMessages);
-
-router.delete('/', auth, isOwner, messageCtrl.deleteMessage);
+router.delete('/:id', auth, isOwner, messageCtrl.deleteMessage);
 
 module.exports = router;
