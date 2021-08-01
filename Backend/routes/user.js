@@ -7,6 +7,8 @@ router.get('/all/', userCtrl.findAllUsers);
 
 router.get('/:id', userCtrl.findOneUser);
 
+router.put('/:id', auth, userCtrl.updateUserName);
+
 router.delete('/', auth, userCtrl.deleteOneUser);
 
 router.delete('/:id', auth, userCtrl.deleteMyAccount);

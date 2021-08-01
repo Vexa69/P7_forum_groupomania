@@ -33,7 +33,7 @@
 								</div>
 							</div>
 							<div id="updateButton" class=" card-body text-center">
-								<button @click="updateMyAccount(id)" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">
+								<button @click="updateUserName(id)" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">
 									Mettre à jour le compte
 								</button>
 								<p style="white-space: pre-line;">{{ message }}</p>
@@ -99,7 +99,7 @@ export default {
 			localStorage.clear();
 			router.push({ path: '/' });
 		},
-		updateMyAccount(m) {
+		updateUserName(m) {
 			let id = m;
 			let confirmUserUpdate = confirm('voulez-vous vraiment modifier nom ?');
 			if (confirmUserUpdate == true) {
