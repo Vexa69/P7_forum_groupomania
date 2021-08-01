@@ -32,6 +32,14 @@
 									</button>
 								</div>
 							</div>
+							<div id="updateButton" class=" card-body text-center">
+								<button @click="updateMyAccount(id)" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">
+									Mettre à jour le compte
+								</button>
+								<p style="white-space: pre-line;">{{ message }}</p>
+								<br />
+								<textarea v-model="message" placeholder="écrivez votre nouveau nom"></textarea>
+							</div>
 							<div class="card-body mx-auto">
 								<div class="btn-danger rounded p-3" style="cursor:default">
 									<button @click="deleteMyAccount(id)" class="rounded p-2">
@@ -90,6 +98,24 @@ export default {
 		localClear() {
 			localStorage.clear();
 			router.push({ path: '/' });
+		},
+		updateMyAccount(n) {
+			let id = n;
+			let confirmUserUpdate = confirm('voulez-vous vraiment modifier nom ?');
+			if (confirmUserUpdate == true) {
+				axios
+					.update('http://localhost:3000/api/users/' + id, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
+					.then(res => {
+						console.log(res);
+						alert("Cliquez sur ok et l'utilisateur sera modifié");
+						router.replace('http://localhost:8080/api/');
+					})
+					.catch(error => {
+						console.log(error);
+					});
+			} else {
+				return;
+			}
 		},
 		deleteMyAccount(n) {
 			let id = n;
