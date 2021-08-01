@@ -5,13 +5,13 @@
 			<form enctype="multipart/form-data">
 				<div class="header p-1">
 					<h1 class="btn btn-dark" style="cursor:default">
-						{{ callName() }} vous allez modifier une publication
+						{{ editName() }} vous allez modifier une publication
 						<img src="../assets/send.svg" class="m-1" alt="send" style="width:1rem" />
 					</h1>
 				</div>
 				<div class="row">
 					<div class="col-12 justify-content-center form-group">
-						<label for="newUpdate">Modifier les détails votre publication.</label>
+						<label for="newEdit">Modifier les détails votre publication.</label>
 						<textarea
 							v-on:keydown="isInvalid = false"
 							class="form-control"
@@ -64,11 +64,11 @@ import router from '../router';
 import '../main.css';
 
 export default {
-	name: 'editCreate',
+	name: 'EditCreate',
 	data() {
 		return {
 			isAdmin: false,
-			newEdit: '',
+			newImage: '',
 			currentUserId: '',
 			newMessage: '',
 			file: null,
@@ -77,7 +77,7 @@ export default {
 		};
 	},
 	methods: {
-		callName() {
+		editName() {
 			let name = localStorage.getItem('userName');
 			return name.charAt(0).toUpperCase() + name.slice(1);
 		},
@@ -86,7 +86,7 @@ export default {
 			this.newImage = URL.createObjectURL(this.file);
 		},
 		send() {
-			if (!this.file || !localStorage.getItem('userName') || !this.newUpdate || this.newUpdate > 1500) {
+			if (!this.file || !localStorage.getItem('userName') || !this.newEdit || this.newEdit > 1500) {
 				this.isInvalid = true;
 
 				console.log('ligne 69' + this.file);
@@ -94,18 +94,28 @@ export default {
 				const formData = new FormData();
 				formData.append('image', this.file);
 				formData.append('UserId', localStorage.getItem('userId'));
-				formData.append('message', this.newMessage.toString());
+				formData.append('message', this.newEdit.toString());
 				axios
-					.post('http://localhost:3000/api/messages/', formData, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
-					.then(() => {
-						this.UserId = '';
-						this.newMessage = '';
-						this.file = null;
-						alert('publication réussie!');
-						router.push({ path: 'Create' });
-					})
-					.catch(error => {
-						console.log(error);
+					.put(
+						'http://127.0.0.1:3000/api/messagesCtrl/' + this.$route.params.id,
+						{ edit: this.editCreate },
+						{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
+					)
+					.then(res => {
+						if (res.status === 200) {
+							alert({
+								text: 'Le message à été mis à jour !',
+								footer: 'Redirection en cours...',
+								icon: 'success',
+								timer: 1500,
+								showConfirmButton: false,
+								timerProgressBar: true,
+								willClose: () => {
+									router.push(this.messageId.slice(1));
+									this.messageId = '';
+								}
+							});
+						}
 					});
 			}
 		}

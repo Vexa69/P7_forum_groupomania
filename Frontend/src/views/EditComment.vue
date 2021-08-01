@@ -11,13 +11,13 @@
 				</div>
 				<div class="row">
 					<div class="col-12 justify-content-center form-group">
-						<label for="newEdit">À vos claviers...</label>
+						<label for="editComment" class="sr-only">À vos claviers...</label>
 						<textarea
 							v-on:keydown="isInvalid = false"
 							class="form-control"
-							v-model="newEdit"
-							id="newEdit"
-							name="edit"
+							v-model="editComment"
+							id="editComment"
+							name="Comment"
 							rows="8"
 							placeholder=" Saisissez votre commentaire ici. (1500 caractères max) "
 						></textarea>
@@ -46,11 +46,12 @@ export default {
 	name: 'EditComment',
 	data() {
 		return {
-			isAdmin: false,
-			currentUserId: '',
-			newComment: '',
-			comments: [],
-			isInvalid: false
+			editComment: '',
+			messageId: '',
+			editUserId: '',
+			editorTag: '',
+			editorColor: 'text-secondary',
+			isSucces: false
 		};
 	},
 	methods: {
@@ -114,7 +115,7 @@ export default {
 						showConfirmButton: false,
 						timerProgressBar: true,
 						willClose: () => {
-							router.push('/messages');
+							router.push('/message');
 						}
 					});
 				}

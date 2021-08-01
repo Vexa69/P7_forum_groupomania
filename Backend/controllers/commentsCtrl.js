@@ -52,25 +52,25 @@ exports.findAllComments = (req, res, next) => {
 };
 
 // UPDATE
-exports.modifyOneComments = (req, res, next) => {
+exports.modifyOneComment = (req, res, next) => {
 	let commentObject = {};
 	const body = sanitize(req.body);
 	req.file
-		? (Comment.findOne({ _id: req.params.id })
+		? (Comment.update({ _id: req.params.id })
 				.then(Comment => {
-					const filename = comment.imageUrl.split("/images/")[1];
+					const filename = comment.imageUrl.split('/images/')[1];
 					fs.unlinkSync(`images/${filename}`);
 				})
 				.catch(error => res.status(500).json({ error })),
 		  (commentObject = {
 				...JSON.parse(body.comment),
-				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+				imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 		  }))
 		: (commentObject = { ...body });
 
-	Comment.updateOne({ _id: req.params.id }, { ...commentObject, _id: req.params.id })
+	Comment.update({ ...req.body }, { where: { id: req.params.id } })
 		.then(() => {
-			res.status(200).json({ message: "Objet modifié !" });
+			res.status(200).json({ message: 'Commentaire modifié !' });
 		})
 		.catch(error => res.status(400).json({ error }));
 };
