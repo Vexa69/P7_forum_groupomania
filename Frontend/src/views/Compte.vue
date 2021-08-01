@@ -38,7 +38,7 @@
 								</button>
 								<p style="white-space: pre-line;">{{ message }}</p>
 								<br />
-								<textarea v-model="message" placeholder="écrivez votre nouveau nom"></textarea>
+								<textarea v-model="message" placeholder="Votre nouveau nom"></textarea>
 							</div>
 							<div class="card-body mx-auto">
 								<div class="btn-danger rounded p-3" style="cursor:default">
@@ -99,8 +99,8 @@ export default {
 			localStorage.clear();
 			router.push({ path: '/' });
 		},
-		updateMyAccount(n) {
-			let id = n;
+		updateMyAccount(m) {
+			let id = m;
 			let confirmUserUpdate = confirm('voulez-vous vraiment modifier nom ?');
 			if (confirmUserUpdate == true) {
 				axios
