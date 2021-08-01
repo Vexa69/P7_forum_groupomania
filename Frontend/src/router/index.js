@@ -32,19 +32,9 @@ const routes = [
 		component: () => import('../views/Create')
 	},
 	{
-		path: '/editcreate',
-		name: 'EditCreate',
-		component: () => import('../views/EditCreate')
-	},
-	{
 		path: '/createComment',
 		name: 'CreateComment',
 		component: () => import('../views/CreateComment')
-	},
-	{
-		path: '/editComment',
-		name: 'EditComment',
-		component: () => import('../views/EditComment')
 	},
 	{
 		path: '/inscription',

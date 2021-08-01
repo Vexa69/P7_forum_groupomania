@@ -33,12 +33,12 @@
 								</div>
 							</div>
 							<div id="updateButton" class=" card-body text-center">
-								<button @click="updateUserName(id)" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">
-									Mettre à jour le compte
+								<button @click="updateUser" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">
+									Validé
 								</button>
-								<p style="white-space: pre-line;">{{ message }}</p>
+
 								<br />
-								<textarea v-model="message" placeholder="Votre nouveau nom"></textarea>
+								<textarea placeholder="Votre nouveau nom"></textarea>
 							</div>
 							<div class="card-body mx-auto">
 								<div class="btn-danger rounded p-3" style="cursor:default">
@@ -95,27 +95,35 @@ export default {
 			});
 	},
 	methods: {
+		updateUser(user) {
+			axios
+				.put(
+					'http://localhost:3000/users/' + user.id,
+					{
+						name: user.userName
+					},
+					{
+						headers: {
+							Authorization: 'Bearer ' + localStorage.token
+						}
+					}
+				)
+				.then(res => {
+					self.creation = res.data.createdAt
+						.slice(0, 10)
+						.split('-')
+						.reverse()
+						.join('.');
+					self.isAdmin = res.data.isAdmin;
+					self.nameCurrentUser = res.data.userName.charAt(0).toUpperCase() + res.data.userName.slice(1);
+					self.id = res.data.id;
+				})
+				.catch(err => console.log(err));
+			window.location.reload();
+		},
 		localClear() {
 			localStorage.clear();
 			router.push({ path: '/' });
-		},
-		updateUserName(m) {
-			let id = m;
-			let confirmUserUpdate = confirm('voulez-vous vraiment modifier nom ?');
-			if (confirmUserUpdate == true) {
-				axios
-					.update('http://localhost:3000/api/users/' + id, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
-					.then(res => {
-						console.log(res);
-						alert("Cliquez sur ok et l'utilisateur sera modifié");
-						router.replace('http://localhost:8080/api/');
-					})
-					.catch(error => {
-						console.log(error);
-					});
-			} else {
-				return;
-			}
 		},
 		deleteMyAccount(n) {
 			let id = n;

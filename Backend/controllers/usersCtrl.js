@@ -3,6 +3,7 @@ const User = db.users;
 const Message = db.messages;
 const Comment = db.comments;
 const { Op } = require('sequelize');
+const { urlencoded } = require('body-parser');
 
 // Routes CRUD : Create, Read, Update, Delete.
 
@@ -42,6 +43,15 @@ exports.findAllUsers = (req, res, next) => {
 		.catch(error => {
 			res.status(400).json({ error });
 		});
+};
+
+exports.updateOneUser = (req, res, next) => {
+	let updateUser = '';
+	User.updateOne({ _id: req.params.id }, { ...updateUser, _id: req.params.id })
+		.then(() => {
+			res.status(200).json({ message: 'Nom modifié !' });
+		})
+		.catch(error => res.status(400).json({ error }));
 };
 
 // params uid & isAdmin
