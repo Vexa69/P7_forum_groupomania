@@ -49,9 +49,9 @@ exports.updateOneUser = (req, res, next) => {
 	console.log(req.params.id);
 	console.log(req.body.name);
 
-	User.update({ userName: req.body.name }, { returning: true, where: { id: req.params.id } })
+	User.update({ userName: req.body.username }, { returning: true, where: { id: req.params.id } })
 		.then(() => {
-			res.status(200).json({ message: 'Nom modifié !' });
+			res.status(200).json({ message: 'Nom modifié !', data: req.body.username });
 		})
 		.catch(error => res.status(400).json({ error }));
 };

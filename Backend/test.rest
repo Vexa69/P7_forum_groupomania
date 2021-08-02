@@ -10,7 +10,7 @@ Content-Type: application/json
 #######
 
 GET http://localhost:3000/api/messages
-Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYyNzY0MzM2OCwiZXhwIjoxNjI3NzI5NzY4fQ.TuFTEDnMQjc8VapWdsrNrv9rDzyxh2cyXVCvkr1wPjc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYyNzkwNTk3NiwiZXhwIjoxNjI3OTkyMzc2fQ.RLKPr-G6tCAkL57aTTYbzHh2Tit-sxDavyTB5864jGs
 
 
 ######
@@ -39,5 +39,8 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdC
 content-type: application/json
 
 {
-    "name": "linette"
+    "name": "jacques"
 }
+#####
+DELETE http://localhost:3000/api/messages/4
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYyNzkwNTk3NiwiZXhwIjoxNjI3OTkyMzc2fQ.RLKPr-G6tCAkL57aTTYbzHh2Tit-sxDavyTB5864jGs

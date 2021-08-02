@@ -104,31 +104,24 @@ export default {
 			});
 	},
 	methods: {
-		updateUser(user) {
+		updateUser(username) {
 			axios
 				.put(
-					'http://localhost:3000/api/users/' + user.id,
+					'http://localhost:3000/api/users/' + localStorage.getItem('userId'),
 					{
-						username: user.Name
+						username
 					},
 					{
 						headers: {
-							Authorization: 'Bearer' + localStorage.getItem('token')
+							Authorization: 'Bearer ' + localStorage.getItem('token')
 						}
 					}
 				)
 				.then(res => {
-					self.nameCurrentUser = res.data.userName
-						.slice(0, 10)
-						.split('-')
-						.reverse()
-						.join('.');
-					self.isAdmin = res.data.isAdmin;
-					self.nameCurrentUser = res.body.userName.charAt(0).toUpperCase() + res.body.userName.slice(1);
-					self.id = res.data.id;
+					localStorage.setItem('userName', res.data.userName);
+					window.location.reload();
 				})
 				.catch(err => console.log(err));
-			window.location.reload();
 		},
 		localClear() {
 			localStorage.clear();
