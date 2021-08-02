@@ -109,11 +109,6 @@
 							<img src="../assets/trash.svg" alt="trash" style="width:25px" />
 						</button>
 					</div>
-					<div id="updateButton" class=" card-body text-center">
-						<router-link to="/UpdateComment"
-							><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">MODIFIER</button></router-link
-						>
-					</div>
 				</div>
 			</div>
 		</section>

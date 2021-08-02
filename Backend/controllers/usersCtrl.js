@@ -44,10 +44,12 @@ exports.findAllUsers = (req, res, next) => {
 			res.status(400).json({ error });
 		});
 };
-
+//UPDATE
 exports.updateOneUser = (req, res, next) => {
-	let updateUser = '';
-	User.updateOne({ _id: req.params.id }, { ...updateUser, _id: req.params.id })
+	console.log(req.params.id);
+	console.log(req.body.name);
+
+	User.update({ userName: req.body.name }, { returning: true, where: { id: req.params.id } })
 		.then(() => {
 			res.status(200).json({ message: 'Nom modifié !' });
 		})

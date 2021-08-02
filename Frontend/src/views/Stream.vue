@@ -81,11 +81,6 @@
 							<button @click="commentPage(message.id)" class="border-0">
 								<img src="../assets/comment_black.svg" alt="comment_black" style="width:25px" />
 							</button>
-							<div id="updateButton" class=" card-body text-center">
-								<router-link to="/EditCreate"
-									><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">MODIFIER</button></router-link
-								>
-							</div>
 							<div v-if="isAdmin || message.UserId == id">
 								<button @click="deleteMessage(message.id, message.UserId, id)" class="border-0">
 									<img src="../assets/trash.svg" alt="trash" style="width:25px" />
@@ -164,14 +159,9 @@ export default {
 			);
 			if (confirmMessageDeletion == true) {
 				axios
-					.delete('http://localhost:3000/api/messages/', {
+					.delete('http://localhost:3000/api/messages/' + a, {
 						headers: {
 							Authorization: 'Bearer ' + localStorage.getItem('token')
-						},
-						params: {
-							messageId: a,
-							messageUid: b,
-							uid: c
 						}
 					})
 					.then(res => console.log(res))

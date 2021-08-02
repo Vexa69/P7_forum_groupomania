@@ -1,16 +1,19 @@
 const jwt = require('jsonwebtoken');
-const Sauce = require('../models/message');
+const db = require('../models');
+const Message = db.messages;
 
 // Pour chaque requête sur une route protégée on passe d'abord par ce middleware :
 module.exports = (req, res, next) => {
 	try {
 		const token = req.headers.authorization.split(' ')[1];
-		const decodedToken = jwt.verify(token, process.env.DB_TOKEN);
+		const decodedToken = jwt.verify(token, process.env.TKN_SECRET);
 		const userId = decodedToken.userId;
 
 		Message.findOne({ _id: req.params.id })
 			.then(message => {
-				if (userId === message.userId) {
+				console.log(userId);
+				console.log(message.UserId);
+				if (userId === message.UserId) {
 					next();
 				} else {
 					throw 'User ID non propriétaire !';

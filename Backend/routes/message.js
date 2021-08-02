@@ -11,7 +11,7 @@ router.get('/all/:id', messageCtrl.findAllMessagesForOne);
 
 router.get('/:id', messageCtrl.findOneMessage);
 
-router.get('/', messageCtrl.findAllMessages);
+router.get('/', auth, messageCtrl.findAllMessages);
 
 router.delete('/:id', auth, isOwner, messageCtrl.deleteMessage);
 

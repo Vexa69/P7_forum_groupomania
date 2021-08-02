@@ -101,19 +101,19 @@ exports.modifyOneMessages = (req, res, next) => {
 	req.file
 		? (Message.findOne({ _id: req.params.id })
 				.then(message => {
-					const filename = message.imageUrl.split("/images/")[1];
+					const filename = message.imageUrl.split('/images/')[1];
 					fs.unlinkSync(`images/${filename}`);
 				})
 				.catch(error => res.status(500).json({ error })),
 		  (messageObject = {
 				...JSON.parse(body.sauce),
-				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+				imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 		  }))
 		: (messageObject = { ...body });
 
 	Message.updateOne({ _id: req.params.id }, { ...messageObject, _id: req.params.id })
 		.then(() => {
-			res.status(200).json({ message: "Objet modifié !" });
+			res.status(200).json({ message: 'Objet modifié !' });
 		})
 		.catch(error => res.status(400).json({ error }));
 };
@@ -122,23 +122,12 @@ exports.modifyOneMessages = (req, res, next) => {
 
 exports.deleteMessage = (req, res, next) => {
 	console.log(' MESSAGE DELETION PROCESS ');
-	console.log(' message Id is: ' + req.query.messageId);
-	console.log(' message User Id is : ' + req.query.messageUid);
-	console.log(' User Id who ask the deletion is : ' + req.query.uid);
+	console.log(' message Id is: ' + req.params.id);
 
-	console.log(' is it the author of the message who ask the deletion or is he Admin (admin is uid=1) ? ') +
-		console.log(' if True => delete the message ');
-	console.log(' if False => unauthorized ');
-
-	console.log(req.query.messageUid == req.query.uid || req.query.uid == 1);
-	if (req.query.messageUid == req.query.uid || req.query.uid == 1) {
-		Comment.destroy({ where: { MessageId: req.query.messageId } });
-		Message.destroy({ where: { id: req.query.messageId } })
-			.then(res => {
-				res.status(200).json({ message: 'Message and its comments have been destroyed' });
-			})
-			.catch(error => res.status(400).json({ error }));
-	} else {
-		res.status(401).json({ message: ' unauthorized ' });
-	}
+	Comment.destroy({ where: { MessageId: req.params.id } });
+	Message.destroy({ where: { id: req.params.id } })
+		.then(res => {
+			return res.status(200).json({ message: 'Message and its comments have been destroyed' });
+		})
+		.catch(error => res.status(400).json({ error }));
 };
