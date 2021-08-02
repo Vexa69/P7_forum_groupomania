@@ -33,12 +33,19 @@
 								</div>
 							</div>
 							<div id="updateButton" class=" card-body text-center">
-								<button @click="updateUser" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">
+								<label for="newName"></label>
+								<textarea
+									v-on:keydown="isInvalid = false"
+									class="form-control"
+									v-model="user"
+									id="user"
+									name="userName"
+									rows="1"
+									placeholder="Votre nouveau nom"
+								></textarea>
+								<button type="button" class="btn btn-success btn-dark mx-auto p-2 rounded buttonsPanel" @click="updateUser(user)">
 									Validé
 								</button>
-
-								<br />
-								<textarea placeholder="Votre nouveau nom"></textarea>
 							</div>
 							<div class="card-body mx-auto">
 								<div class="btn-danger rounded p-3" style="cursor:default">
@@ -71,8 +78,10 @@ export default {
 		return {
 			isAdmin: false,
 			nameCurrentUser: '',
+			user: '',
 			creation: '',
-			id: ''
+			id: '',
+			edit: false
 		};
 	},
 	created: function() {
@@ -109,7 +118,7 @@ export default {
 					}
 				)
 				.then(res => {
-					self.creation = res.data.createdAt
+					self.nameCurrentUser = res.data.userName
 						.slice(0, 10)
 						.split('-')
 						.reverse()

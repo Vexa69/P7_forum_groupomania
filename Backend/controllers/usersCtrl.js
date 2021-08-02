@@ -44,7 +44,7 @@ exports.findAllUsers = (req, res, next) => {
 			res.status(400).json({ error });
 		});
 };
-
+//UPDATE
 exports.updateOneUser = (req, res, next) => {
 	let updateUser = '';
 	User.updateOne({ _id: req.params.id }, { ...updateUser, _id: req.params.id })
