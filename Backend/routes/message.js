@@ -13,6 +13,6 @@ router.get('/:id', messageCtrl.findOneMessage);
 
 router.get('/', messageCtrl.findAllMessages);
 
-router.delete('/:id', auth, isOwner, messageCtrl.deleteMessage);
+router.delete('/:id', messageCtrl.deleteMessage);
 
 module.exports = router;

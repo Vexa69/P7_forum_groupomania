@@ -8,7 +8,7 @@ router.get('/all/', userCtrl.findAllUsers);
 
 router.get('/:id', userCtrl.findOneUser);
 
-router.put('/:id', auth, isOwner, userCtrl.updateOneUser);
+router.put('/:id', auth, userCtrl.updateOneUser);
 
 router.delete('/', auth, userCtrl.deleteOneUser);
 

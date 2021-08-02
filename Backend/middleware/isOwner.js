@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Sauce = require('../models/message');
+const Message = require('../models/message');
 
 // Pour chaque requête sur une route protégée on passe d'abord par ce middleware :
 module.exports = (req, res, next) => {

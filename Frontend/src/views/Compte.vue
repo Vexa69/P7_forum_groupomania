@@ -107,13 +107,13 @@ export default {
 		updateUser(user) {
 			axios
 				.put(
-					'http://localhost:3000/users/' + user.id,
+					'http://localhost:3000/api/users/' + user.id,
 					{
 						name: user.userName
 					},
 					{
 						headers: {
-							Authorization: 'Bearer ' + localStorage.token
+							Authorization: 'Bearer' + localStorage.getItem('token')
 						}
 					}
 				)
